@@ -1,994 +1,720 @@
- <!DOCTYPE html>
-
-<html lang="fr" data-theme="dark">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Magui_Dev — Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
-  <style>
-    [data-theme="dark"] {
-      --bg: #070b14;
-      --bg2: #0d1220;
-      --card: #111827;
-      --card2: #1a2235;
-      --border: #1e2d45;
-      --accent: #3b82f6;
-      --accent2: #8b5cf6;
-      --accent3: #ec4899;
-      --text: #f1f5f9;
-      --text2: #94a3b8;
-      --bar-bg: #1e2d45;
-      --nav-bg: rgba(7,11,20,0.92);
-      --shadow: rgba(59,130,246,0.15);
-    }
-    [data-theme="light"] {
-      --bg: #f8faff;
-      --bg2: #eef2ff;
-      --card: #ffffff;
-      --card2: #f1f5f9;
-      --border: #cbd5e1;
-      --accent: #3b82f6;
-      --accent2: #8b5cf6;
-      --accent3: #ec4899;
-      --text: #0f172a;
-      --text2: #475569;
-      --bar-bg: #e2e8f0;
-      --nav-bg: rgba(248,250,255,0.92);
-      --shadow: rgba(59,130,246,0.1);
-    }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-  transition: background 0.3s, color 0.3s;
-}
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyGlow - Institut de Beauté Luxe</title>
 
-/* NAVBAR */
-#navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0.9rem 2.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: background 0.3s;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 1.4rem;
-  color: var(--text); text-decoration: none;
-}
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
-.nav-links a {
-  color: var(--text2); text-decoration: none;
-  font-size: 0.85rem; font-weight: 500;
-  transition: color 0.2s; position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute;
-  bottom: -3px; left: 0; right: 0; height: 2px;
-  background: var(--accent); transform: scaleX(0); transition: transform 0.2s;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
-.nav-links a.active { color: var(--accent); }
-.theme-toggle {
-  background: var(--card2); border: 1px solid var(--border); color: var(--text);
-  width: 38px; height: 38px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 1rem; transition: all 0.2s;
-}
-.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.nav-hamburger { display: none; background: none; border: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
-
-/* HERO */
-#hero {
-  min-height: 100vh; display: flex; align-items: center;
-  position: relative; overflow: hidden; padding: 6rem 2.5rem 3rem;
-}
-.blob { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: blobMove 8s ease-in-out infinite alternate; }
-.blob-1 { width: 500px; height: 500px; background: rgba(59,130,246,0.12); top: -150px; right: -100px; }
-.blob-2 { width: 350px; height: 350px; background: rgba(139,92,246,0.1); bottom: 50px; left: -80px; animation-delay: -4s; }
-.blob-3 { width: 250px; height: 250px; background: rgba(236,72,153,0.07); top: 30%; right: 20%; animation-delay: -2s; }
-@keyframes blobMove { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(30px,-20px) scale(1.05); } }
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
-  color: var(--accent); padding: 0.4rem 1rem; border-radius: 100px;
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-  margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.5s 0.2s forwards;
-}
-.hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.3); } }
-
-h1.hero-name {
-  font-family: 'Playfair Display', serif; font-weight: 900;
-  font-size: clamp(3rem,7vw,5.5rem); line-height: 1.05; letter-spacing: -0.03em;
-  margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
-}
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hero-role { font-size: 1.15rem; font-weight: 500; color: var(--text2); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
-.hero-desc { max-width: 500px; color: var(--text2); font-size: 0.95rem; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
-.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.6s 0.8s forwards; }
-.hero-socials { display: flex; gap: 0.75rem; opacity: 0; animation: fadeUp 0.6s 0.95s forwards; }
-
-.btn-primary-custom {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 8px;
-  font-family: 'Space Grotesk',sans-serif; font-size: 0.9rem; font-weight: 600;
-  text-decoration: none; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  box-shadow: 0 4px 20px rgba(59,130,246,0.3);
-}
-.btn-primary-custom:hover { opacity: 0.9; transform: translateY(-2px); color: #fff; box-shadow: 0 8px 30px rgba(59,130,246,0.4); }
-.btn-outline-custom {
-  background: transparent; color: var(--text); border: 1px solid var(--border);
-  padding: 0.8rem 2rem; border-radius: 8px;
-  font-family: 'Space Grotesk',sans-serif; font-size: 0.9rem; font-weight: 600;
-  text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
-}
-.btn-outline-custom:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.05); }
-
-.social-btn {
-  width: 42px; height: 42px; border: 1px solid var(--border); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text2); text-decoration: none; font-size: 1rem;
-  transition: all 0.2s; background: var(--card);
-}
-.social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); background: rgba(59,130,246,0.08); }
-
-.hero-stats {
-  display: flex; gap: 2.5rem; flex-wrap: wrap; padding: 1.5rem;
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-top: 2rem;
-  opacity: 0; animation: fadeUp 0.6s 1.1s forwards;
-}
-.stat-item { text-align: center; }
-.stat-num {
-  font-family: 'Playfair Display',serif; font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
-}
-.stat-label { font-size: 0.75rem; color: var(--text2); margin-top: 0.3rem; }
-
-.scroll-btn {
-  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-  color: var(--text2); text-decoration: none; font-size: 0.7rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  animation: bounceScroll 2s ease-in-out infinite;
-}
-.scroll-wheel {
-  width: 24px; height: 38px; border: 2px solid var(--border);
-  border-radius: 100px; display: flex; justify-content: center; padding-top: 6px;
-}
-.scroll-wheel::before {
-  content: ''; width: 4px; height: 8px; background: var(--accent);
-  border-radius: 100px; animation: wheelScroll 2s ease-in-out infinite;
-}
-@keyframes wheelScroll { 0% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(12px); } }
-@keyframes bounceScroll { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(6px); } }
-     
-
-
-/* SECTIONS */
-section { padding: 6rem 0; }
-.section-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
-h2.section-title { font-family: 'Playfair Display',serif; font-weight: 900; font-size: clamp(2rem,4vw,2.8rem); letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 0.75rem; }
-.section-sub { color: var(--text2); font-size: 0.95rem; max-width: 520px; }
-.underline-accent { width: 50px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 10px; margin: 1rem 0 2.5rem; }
-
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s, transform 0.65s; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.65s, transform 0.65s; }
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.65s, transform 0.65s; }
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-/* ABOUT */
-#about { background: var(--bg2); }
-.about-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; }
-.about-text { color: var(--text2); line-height: 1.9; }
-.about-text strong { color: var(--text); }
-.about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
-.info-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.85rem; }
-.info-icon { width: 32px; height: 32px; background: rgba(59,130,246,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 0.9rem; flex-shrink: 0; }
-.info-label { color: var(--text2); font-size: 0.75rem; }
-.info-value { color: var(--text); font-weight: 600; }
-.about-photo-wrap { position: relative;}
-.about-photo {
-  width: 100%; aspect-ratio: 4/5; border-radius: 20px;
-  background: linear-gradient(135deg, var(--card2), var(--card));
-  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
-}
-.initials-big { font-family: 'Playfair Display',serif; font-size: 7rem; font-weight: 900; color: rgba(59,130,246,0.07); user-select: none; }
-.photo-tag {
-  position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-  background: var(--card); border: 1px solid var(--border); border-radius: 100px;
-  padding: 0.4rem 1.2rem; font-size: 0.75rem; color: var(--text2); white-space: nowrap;
-}
-.deco-card {
-  position: absolute; background: var(--card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 0.8rem 1.2rem; font-size: 0.78rem; font-weight: 600;
-  box-shadow: 0 8px 30px var(--shadow);
-}
-.deco-card.top-right { top: -1rem; right: -1rem; color: var(--accent); }
-.deco-card.bottom-left { bottom: 3rem; left: -1.5rem; color: var(--accent2); }
-
-.img1{
-    width: 100vh;
-    margin-top: 255px;
-    margin-left: 195px;
-}
-
-/* SKILLS */
-#skills { background: var(--bg); }
-.skill-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; height: 100%;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-.skill-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
-.skill-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
-.skill-card-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
-.icon-blue { background: rgba(59,130,246,0.15); color: var(--accent); }
-.icon-purple { background: rgba(139,92,246,0.15); color: var(--accent2); }
-.icon-pink { background: rgba(236,72,153,0.15); color: var(--accent3); }
-.skill-card-title { font-family: 'Playfair Display',serif; font-weight: 700; font-size: 1.1rem; }
-.skill-item { margin-bottom: 1.2rem; }
-.skill-meta { display: flex; justify-content: space-between; margin-bottom: 0.45rem; }
-.skill-name { font-size: 0.88rem; font-weight: 500; }
-.skill-pct { font-size: 0.8rem; color: var(--accent); font-weight: 700; }
-.progress-bar-wrap { height: 7px; background: var(--bar-bg); border-radius: 100px; overflow: hidden; }
-.progress-bar-fill { height: 100%; border-radius: 100px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
-.fill-blue { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-.fill-purple { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
-.fill-pink { background: linear-gradient(90deg, var(--accent3), #f97316); }
-
-/* PROJECTS */
-#projects { background: var(--bg2); }
-.project-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; height: 100%;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-.project-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-5px); box-shadow: 0 16px 50px var(--shadow); }
-.project-thumb { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.project-thumb-1 { background: linear-gradient(135deg, #1e3a5f, #1e1b4b); }
-.project-thumb-2 { background: linear-gradient(135deg, #1a1a3e, #2d1b69); }
-.project-thumb-3 { background: linear-gradient(135deg, #1f2937, #111827); }
-.project-thumb-4 { background: linear-gradient(135deg, #1a2035, #0f172a); }
-.project-thumb-icon { font-size: 3.5rem; opacity: 0.4; }
-.project-thumb-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.4)); }
-.project-num-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 100px; letter-spacing: 0.1em; }
-.project-body { padding: 1.5rem; }
-.project-title { font-family: 'Playfair Display',serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; }
-.project-desc { color: var(--text2); font-size: 0.875rem; margin-bottom: 1.2rem; line-height: 1.7; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
-.project-tag { font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 100px; background: rgba(59,130,246,0.1); color: var(--accent); border: 1px solid rgba(59,130,246,0.2); }
-.project-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text2); text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: color 0.2s; }
-.project-link:hover { color: var(--accent); }
-
-/* FORMATIONS */
-#formations { background: var(--bg); }
-.formation-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-  padding: 1.5rem 2rem; display: flex; gap: 1.2rem; align-items: flex-start;
-  transition: border-color 0.3s, transform 0.3s;
-}
-.formation-card:hover { border-color: rgba(59,130,246,0.35); transform: translateX(4px); }
-.formation-icon { width: 46px; height: 46px; flex-shrink: 0; background: rgba(59,130,246,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.2rem; }
-.formation-period { font-size: 0.72rem; color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
-.formation-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; }
-.formation-school { color: var(--text2); font-size: 0.82rem; }
-
-/* EXPERIENCE */
-#experience { background: var(--bg2); }
-.xp-banner { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.08)); border: 1px solid rgba(59,130,246,0.2); border-radius: 20px; padding: 2.5rem; text-align: center; }
-.xp-banner-num { font-family: 'Playfair Display',serif; font-size: 5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
-.xp-banner-text { color: var(--text2); font-size: 1rem; margin-top: 0.5rem; }
-.xp-list { list-style: none; }
-.xp-list li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text2); }
-.xp-list li:last-child { border-bottom: none; }
-.xp-list li i { color: var(--accent); margin-top: 0.15rem; flex-shrink: 0; }
-.xp-list li strong { color: var(--text); }
-
-/* CONTACT */
-#contact { background: var(--bg); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; }
-.contact-info-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1rem; text-decoration: none; color: var(--text); transition: all 0.2s; }
-.contact-info-item:hover { border-color: var(--accent); transform: translateX(4px); color: var(--text); }
-.contact-info-icon { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-.ci-blue { background: rgba(59,130,246,0.15); color: var(--accent); }
-.ci-green { background: rgba(34,197,94,0.15); color: #22c55e; }
-.ci-orange { background: rgba(249,115,22,0.15); color: #f97316; }
-.contact-info-label { font-size: 0.72rem; color: var(--text2); margin-bottom: 0.1rem; }
-.contact-info-value { font-size: 0.9rem; font-weight: 600; }
-.contact-form-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; }
-.form-label-custom { font-size: 0.82rem; font-weight: 600; color: var(--text2); margin-bottom: 0.4rem; display: block; }
-.form-control-custom { width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); padding: 0.75rem 1rem; font-family: 'Space Grotesk',sans-serif; font-size: 0.9rem; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
-.form-control-custom:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-.form-control-custom::placeholder { color: var(--text2); opacity: 0.5; }
-textarea.form-control-custom { resize: vertical; min-height: 120px; }
-.form-group { margin-bottom: 1.2rem; }
-.btn-submit { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 0.85rem 2rem; border-radius: 10px; font-family: 'Space Grotesk',sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; width: 100%; transition: opacity 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-.btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
-.social-row { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-.social-row a { flex: 1; min-width: 0; padding: 0.7rem 0.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 0.4rem; color: var(--text2); text-decoration: none; font-size: 0.78rem; font-weight: 600; transition: all 0.2s; }
-.social-row a:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.05); }
-
-footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--text2); font-size: 0.8rem; flex-wrap: wrap; gap: 1rem; }
-.footer-logo { font-family: 'Playfair Display',serif; font-weight: 900; font-size: 1.1rem; color: var(--text); }
-.footer-logo span { color: var(--accent); }
-
-@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-
-@media (max-width: 992px) { .contact-grid { grid-template-columns: 1fr; } }
-@media (max-width: 768px) {
-  #navbar { padding: 0.8rem 1.2rem; }
-  .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--nav-bg); flex-direction: column; padding: 1.5rem; border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); }
-  .nav-links.open { display: flex; }
-  .nav-hamburger { display: block; }
-  #hero { padding: 5.5rem 1.2rem 5rem; }
-  .hero-stats { gap: 1.5rem; justify-content: space-between; }
-  .about-info-grid { grid-template-columns: 1fr; }
-  section { padding: 4rem 0; }
-  .deco-card { display: none; }
-  footer { flex-direction: column; text-align: center; }
-}
-  
-
-
-
-
-  /* === ZONE VISUELLE === */
-  .hero-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 500px;
-    margin-right: 45px;
-  }
-
-  /* Lueur ambiante de fond */
-  .hero-visual::before {
-    content: '';
-    position: absolute;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,92,252,0.18) 0%, rgba(236,72,153,0.08) 50%, transparent 70%);
-    animation: breathe 5s ease-in-out infinite;
-  }
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  /* === BORDURE GRADIENT ANIMÉE === */
-  .photo-wrapper {
-    position: relative;
-    width: 400px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 75px;
-  }
-
-  .gradient-ring {
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-     height: 400px;
-    width: 400px;
-    background: conic-gradient(
-      from 0deg,
-      #7c5cfc,
-      #ec4899,
-      #f97316,
-      #facc15,
-      #7c5cfc
-    );
-    animation: spin-gradient 4s linear infinite;
-    z-index: 1;
-  }
-  @keyframes spin-gradient {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Masque intérieur pour ne garder que le bord */
-  .gradient-ring::after {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border-radius: 50%;
-    background: #07071a; /* ⚠️ Mettez ici la couleur de fond de votre page */
-   
-  }
-
-  /* Photo */
-  .photo-circle {
-    position: relative;
-    width: 390px;
-    height: 390px;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 2;
-    margin-right: 10px;
-    margin-top: 90px;
-  }
-  .photo-circle img {
-    width: 55vh;
-    height: 65vh;
-    object-fit: cover;
-  }
-
-  /* === ANNEAU LUMINEUX 1 (violet) === */
-  .light-ring {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(124,92,252,0.15);
-    z-index: 0;
-    animation: spin-gradient 8s linear infinite reverse;
-  }
-  .light-ring::before {
-    content: '';
-    position: absolute;
-    top: -5px; left: 50%;
-    transform: translateX(-50%);
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: #7c5cfc;
-    box-shadow: 0 0 20px 6px rgba(124,92,252,0.7), 0 0 40px 10px rgba(124,92,252,0.3);
-  }
-  .light-ring::after {
-    content: '';
-    position: absolute;
-    top: -3px; left: 50%;
-    transform: translateX(-50%);
-    width: 3px; height: 60px;
-    background: linear-gradient(to bottom, rgba(124,92,252,0.8), transparent);
-    border-radius: 2px;
-  }
-
-  /* === ANNEAU LUMINEUX 2 (rose) === */
-  .light-ring-2 {
-    position: absolute;
-    width: 450px;
-    height: 450px;
-    border-radius: 50%;
-    border: 1px solid rgba(236,72,153,0.1);
-    z-index: 0;
-    animation: spin-gradient 14s linear infinite;
-  }
-  .light-ring-2::before {
-    content: '';
-    position: absolute;
-    bottom: -5px; left: 50%;
-    transform: translateX(-50%);
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #ec4899;
-    box-shadow: 0 0 16px 5px rgba(236,72,153,0.7), 0 0 32px 8px rgba(236,72,153,0.3);
-  }
-
-  /* === PARTICULES === */
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    animation: float-particle ease-in-out infinite;
-  }
-  @keyframes float-particle {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-    50% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0.4; }
-  }
-
-  .p1 { width: 8px; height: 8px; background: #7c5cfc; top: 5%; left: 20%; --tx: -8px; --ty: -12px; animation-duration: 4s; box-shadow: 0 0 8px #7c5cfc; }
-  .p2 { width: 5px; height: 5px; background: #ec4899; top: 15%; right: 12%; --tx: 6px; --ty: -8px; animation-duration: 5s; animation-delay: -1s; box-shadow: 0 0 6px #ec4899; }
-  .p3 { width: 6px; height: 6px; background: #f97316; bottom: 20%; left: 10%; --tx: -6px; --ty: 10px; animation-duration: 6s; animation-delay: -2s; box-shadow: 0 0 6px #f97316; }
-  .p4 { width: 4px; height: 4px; background: #facc15; bottom: 10%; right: 20%; --tx: 8px; --ty: 8px; animation-duration: 3.5s; animation-delay: -0.5s; box-shadow: 0 0 6px #facc15; }
-  .p5 { width: 7px; height: 7px; background: #a78bfa; top: 50%; right: 5%; --tx: 10px; --ty: -6px; animation-duration: 7s; animation-delay: -3s; box-shadow: 0 0 8px #a78bfa; }
-  .p6 { width: 4px; height: 4px; background: #f9a8d4; top: 45%; left: 5%; --tx: -10px; --ty: 4px; animation-duration: 4.5s; animation-delay: -1.5s; box-shadow: 0 0 6px #f9a8d4; }
-
-  /* === CARTES FLOTTANTES === */
-  .info-card {
-    position: absolute;
-    bottom: 5%; right: 0%;
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(124,92,252,0.25);
-    border-radius: 14px;
-    padding: 0.9rem 1.2rem;
-    z-index: 10;
-    animation: float-card 6s ease-in-out infinite;
-  }
-  .location-card {
-    position: absolute;
-    top: 8%; left: 0%;
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(236,72,153,0.25);
-    border-radius: 14px;
-    padding: 0.8rem 1rem;
-    z-index: 10;
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.8);
-    animation: float-card 7s ease-in-out infinite;
-    animation-delay: -3s;
-  }
-  .location-card span { color: #ec4899; }
-
-  @keyframes float-card {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .info-card .label { font-size: 0.65rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
-  .info-card .value { font-size: 0.85rem; color: #fff; font-weight: 500; }
-  .dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #22c55e;
-    margin-right: 6px;
-    animation: pulse-dot 2s infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-</style>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">Magui<span>_Dev</span></a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#projects">Projets</a></li>
-    <li><a href="#formations">Formations</a></li>
-    <li><a href="#experience">Expérience</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="d-flex align-items-center gap-2">
-    <button class="theme-toggle" id="themeToggle" title="Changer le thème">
-      <i class="bi bi-sun-fill" id="themeIcon"></i>
-    </button>
-    <button class="nav-hamburger" id="hamburger"><i class="bi bi-list"></i></button>
-  </div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+<div class="container">
+<a class="navbar-brand fw-bold fs-4" href="#">
+  <i class="bi bi-flower2 me-2 nav-icon-flower"></i>Beauty<span class="brand-glow">Glow</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto align-items-center">
+<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+<li class="nav-item"><a class="nav-link" href="#packs">Packs</a></li>
+<li class="nav-item"><a class="nav-link" href="#reservation">Réserver</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+<li class="nav-item ms-2">
+  <a class="nav-link position-relative" href="#" id="cart-icon" data-bs-toggle="modal" data-bs-target="#cartModal">
+    <i class="bi bi-cart3" style="font-size:22px;"></i>
+    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display:none;">0</span>
+  </a>
+</li>
+<li class="nav-item ms-2 d-none d-lg-block">
+  <a href="#reservation" class="btn btn-rose-nav btn-sm rounded-pill px-3">Prendre RDV</a>
+</li>
+</ul>
+</div>
+</div>
 </nav>
 
 <!-- HERO -->
-
-<section id="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="hero-badge"><span class="dot"></span> Disponible pour collaboration</div>
-        <h1 class="hero-name">Magui-<span class="gradient-text">Dev</span></h1>
-        <p class="hero-role">Développeuse Web & Designer</p>
-        <p class="hero-desc">Je crée des interfaces web élégantes et fonctionnelles, alliant sens du design et maîtrise du code. Basée à Saint-Louis, Sénégal.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn-primary-custom"><i class="bi bi-grid-3x3-gap"></i> Voir mes projets</a>
-          <a href="#contact" class="btn-outline-custom"><i class="bi bi-send"></i> Me contacter</a>
-        </div>
-        <div class="hero-socials">
-          <a href="#" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>
-          <a href="#" class="social-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-          <a href="#" class="social-btn" title="Facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="social-btn" title="Instagram"><i class="bi bi-instagram"></i></a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Clients</div></div>
-          <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">An d'expérience</div></div>
-          <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Projets réalisés</div></div>
-          <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Créativité</div></div>
-        </div>
-      </div>
-    </div>
+<section class="hero-split">
+<div class="container">
+<div class="row align-items-center min-vh-100 g-5">
+<div class="col-lg-6 order-1 order-lg-1 text-center text-lg-start">
+  <p class="hero-badge">Institut de Beauté Haut de Gamme</p>
+  <h1 class="hero-heading">Sublimez votre <span class="hero-accent">beauté</span> naturelle</h1>
+  <p class="hero-text">Découvrez nos soins d'exception, nos packs exclusifs et notre expertise pour révéler votre éclat. Bienvenue chez BeautyGlow, Saint-Louis.</p>
+  <div class="d-flex gap-3 justify-content-center justify-content-lg-start mt-4">
+    <a href="#reservation" class="btn btn-hero-primary btn-lg rounded-pill px-5">Réserver maintenant</a>
+    <a href="#services" class="btn btn-hero-outline btn-lg rounded-pill px-4">Nos services</a>
   </div>
-  <!-- HERO VISUAL — À coller dans votre       -->
-
-<!-- ============================================ -->
-
-<div class="hero-visual">
-
-  <!-- Anneaux lumineux -->
-
-  <div class="light-ring"></div>
-  <div class="light-ring-2"></div>
-
-  <!-- Photo avec bordure gradient -->
-
-  <div class="photo-wrapper">
-    <div class="gradient-ring"></div>
-    <div class="photo-circle">
-      <img src="WhatsApp Image 2026-03-12 at 22.32.42 (1).jpeg" alt="Magui">
-    </div>
+  <div class="hero-stats d-flex gap-4 mt-5 justify-content-center justify-content-lg-start">
+    <div><h4 class="fw-bold mb-0" style="color:var(--rose-luxe);">2500+</h4><small class="text-muted">Clientes</small></div>
+    <div class="vr"></div>
+    <div><h4 class="fw-bold mb-0" style="color:var(--rose-luxe);">4.9/5</h4><small class="text-muted">Satisfaction</small></div>
+    <div class="vr"></div>
+    <div><h4 class="fw-bold mb-0" style="color:var(--rose-luxe);">8 ans</h4><small class="text-muted">Expérience</small></div>
   </div>
-
-  <!-- Particules -->
-
-  <div class="particle p1"></div>
-  <div class="particle p2"></div>
-  <div class="particle p3"></div>
-  <div class="particle p4"></div>
-  <div class="particle p5"></div>
-  <div class="particle p6"></div>
-
-  <!-- Cartes flottantes -->
-
-  <div class="info-card">
-    <div class="label">Statut</div>
-    <div class="value"><span class="dot"></span>Disponible</div>
+</div>
+<div class="col-lg-6 order-2 order-lg-2 text-center">
+  <div class="hero-image-wrapper">
+    <img src="_.jpeg" alt="Salon de beauté" class="hero-float-img">
+    <div class="hero-img-decoration"></div>
   </div>
-  <div class="location-card">
-    📍 Saint-Louis, <span>Sénégal</span>
-  </div>
+</div>
+</div>
+</div>
+</section>
 
+<!-- SERVICES -->
+<section id="services" class="fade-in">
+<div class="container text-center">
+<p class="section-subtitle">Ce que nous offrons</p>
+<h2 class="section-title mb-5">Nos Services Premium</h2>
+<div class="row g-4">
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-stars"></i></div>
+<h5 class="fw-bold">Soin du visage</h5>
+<p class="text-muted small mb-2">Nettoyage profond, hydratation et anti-âge.</p>
+<p class="price-tag">25 000 FCFA</p>
+</div>
+</div>
 </div>
 
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-hand-index-thumb"></i></div>
+<h5 class="fw-bold">Manucure & Pédicure</h5>
+<p class="text-muted small mb-2">Pose vernis simple ou semi-permanent.</p>
+<p class="price-tag">15 000 FCFA</p>
+</div>
+</div>
+</div>
 
-  <!-- <a href="#about" class="scroll-btn"><div class="scroll-wheel"></div><span>Scroll</span></a> -->
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-brush"></i></div>
+<h5 class="fw-bold">Maquillage Pro</h5>
+<p class="text-muted small mb-2">Maquillage mariage & événements.</p>
+<p class="price-tag">30 000 FCFA</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-eye"></i></div>
+<h5 class="fw-bold">Extensions de cils</h5>
+<p class="text-muted small mb-2">Volume russe & cil à cil.</p>
+<p class="price-tag">20 000 FCFA</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-scissors"></i></div>
+<h5 class="fw-bold">Coiffure & Brushing</h5>
+<p class="text-muted small mb-2">Brushing, tresses, coiffure mariage.</p>
+<p class="price-tag">10 000 FCFA</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-heart-pulse"></i></div>
+<h5 class="fw-bold">Massage Relaxant</h5>
+<p class="text-muted small mb-2">Détente complète corps & esprit.</p>
+<p class="price-tag">35 000 FCFA</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0">
+<div class="card-body text-center p-4">
+<div class="service-icon mx-auto mb-3"><i class="bi bi-flower1"></i></div>
+<h5 class="fw-bold">Épilation</h5>
+<p class="text-muted small mb-2">Cire chaude & complète.</p>
+<p class="price-tag">5 000 FCFA</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+<div class="card service-card shadow-sm h-100 border-0 best-seller-card">
+<div class="card-body text-center p-4">
+<span class="badge bg-danger position-absolute top-0 end-0 m-2">Populaire</span>
+<div class="service-icon mx-auto mb-3"><i class="bi bi-gem"></i></div>
+<h5 class="fw-bold">Forfait Mariée Luxe</h5>
+<p class="text-muted small mb-2">Maquillage + coiffure + soins visage.</p>
+<p class="price-tag">100 000 FCFA</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<!-- ABOUT -->
+<!-- PACKS -->
+<section id="packs" class="bg-light fade-in">
+<div class="container text-center">
+<p class="section-subtitle">Offres exclusives</p>
+<h2 class="section-title mb-5">Nos Packs Beauté</h2>
+<div class="row g-4">
 
-<section id="about">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-5 reveal-left">
-        <div class="about-photo-wrap">
-          <div class="about-photo">
-            <img class="img1" src="WhatsApp Image 2026-03-12 at 22.32.43.jpeg" alt="">
-            <span class="initials-big">MS</span>
-            <span class="photo-tag"><i class="bi bi-geo-alt-fill me-1"></i>Saint-Louis, Sénégal</span>
-          </div>
-          <div class="deco-card top-right"><i class="bi bi-stars me-1"></i> Disponible</div>
-          <div class="deco-card bottom-left"><i class="bi bi-code-slash me-1"></i> Dev & Design</div>
-        </div>
-      </div>
-      <div class="col-lg-7 reveal-right">
-        <h2 class="section-title">Passionnée par le<br>web & le design.</h2>
-        <div class="underline-accent"></div>
-        <div class="about-card"> 
-          <p class="about-text">Je suis <strong>Magui-Dev</strong>, développeuse web et designer passionnée, basée à <strong>Saint-Louis, Sénégal</strong>. Depuis 1 an, j'apprends et je crée des interfaces web qui allient esthétique soignée et code propre.</p>
-          <br>
-          <p class="about-text">Mon approche mêle sensibilité artistique et logique de développement. Je suis <strong>disponible pour des collaborations</strong>, des projets freelance, ou toute opportunité de grandir et contribuer.</p>
-          <div class="about-info-grid">
-            <div class="info-item"><div class="info-icon"><i class="bi bi-envelope"></i></div><div><div class="info-label">E-mail</div><div class="info-value" style="font-size:0.75rem">magatteniang021@gmail.com</div></div></div>
-            <div class="info-item"><div class="info-icon"><i class="bi bi-telephone"></i></div><div><div class="info-label">Téléphone</div><div class="info-value">78 207 28 69</div></div></div>
-            <div class="info-item"><div class="info-icon"><i class="bi bi-geo-alt"></i></div><div><div class="info-label">Localisation</div><div class="info-value">Saint-Louis, SN</div></div></div>
-            <div class="info-item"><div class="info-icon"><i class="bi bi-check-circle"></i></div><div><div class="info-label">Statut</div><div class="info-value" style="color:#22c55e">Disponible ✓</div></div></div>
-          </div>
-          <a href="#" class="btn-primary-custom mt-3" style="display:inline-flex"><i class="bi bi-download"></i> Télécharger mon CV</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Pack 1 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<div class="pack-img-wrapper">
+<img src="p1.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Glow Express</h5>
+<p class="text-muted small mb-2">Soin visage + Manucure</p>
+<p class="price-tag fs-5 mb-3">35 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Glow Express',35000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Service incroyable !" – <strong>Aïssatou</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pack 2 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<span class="pack-badge">Best Seller</span>
+<div class="pack-img-wrapper">
+<img src="p2.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Mariée Luxe</h5>
+<p class="text-muted small mb-2">Maquillage + Coiffure + Soin visage</p>
+<p class="price-tag fs-5 mb-3">100 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Mariée Luxe',100000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Parfait pour le mariage !" – <strong>Fatou</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pack 3 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<div class="pack-img-wrapper">
+<img src="p3.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Relax Premium</h5>
+<p class="text-muted small mb-2">Massage + Soin corps + Épilation</p>
+<p class="price-tag fs-5 mb-3">70 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Relax Premium',70000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Détente incroyable !" – <strong>Mariama</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pack 4 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<span class="pack-badge bg-info">Nouveau</span>
+<div class="pack-img-wrapper">
+<img src="p4.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Ongles Luxe</h5>
+<p class="text-muted small mb-2">Manucure + Pédicure + Vernis semi-permanent</p>
+<p class="price-tag fs-5 mb-3">40 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Ongles Luxe',40000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Je me sens féminine et raffinée !" – <strong>Tacko Mbaye</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pack 5 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<div class="pack-img-wrapper">
+<img src="p5.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Spa Relax</h5>
+<p class="text-muted small mb-2">Massage complet + Soin visage relaxant</p>
+<p class="price-tag fs-5 mb-3">60 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Spa Relax',60000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Mon visage est lumineux et revitalisé !" – <strong>Omar</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Pack 6 -->
+<div class="col-md-6 col-lg-4">
+<div class="card pack-card shadow-sm h-100 border-0 position-relative overflow-hidden">
+<span class="pack-badge" style="background:#9333ea;">Premium</span>
+<div class="pack-img-wrapper">
+<img src="p6.jpeg" class="card-img-top">
+</div>
+<div class="card-body d-flex flex-column p-4">
+<h5 class="fw-bold mb-1">Pack Mariée Premium</h5>
+<p class="text-muted small mb-2">Maquillage + Coiffure + Soins + Massage</p>
+<p class="price-tag fs-5 mb-3">120 000 FCFA</p>
+<button class="btn btn-warning w-100 mt-auto" onclick="addToCart('Pack Mariée Premium',120000,this)"><i class="bi bi-bag-plus me-2"></i>Ajouter au panier</button>
+<div class="review-block mt-3">
+<div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+<p class="small fst-italic text-muted mb-0">"Je rayonne de beauté et de bonheur !" – <strong>Madame Thiam</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<!-- SKILLS -->
-
-<section id="skills">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <h2 class="section-title">Mes compétences techniques.</h2>
-      <div class="underline-accent mx-auto"></div>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4 reveal">
-        <div class="skill-card">
-          <div class="skill-card-header"><div class="skill-card-icon icon-blue"><i class="bi bi-laptop"></i></div><div class="skill-card-title">Développement Front-end</div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">HTML5</span><span class="skill-pct">85%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-blue" data-width="85"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">CSS3</span><span class="skill-pct">80%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-blue" data-width="80"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">JavaScript</span><span class="skill-pct">40%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-blue" data-width="40"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Bootstrap</span><span class="skill-pct">75%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-blue" data-width="75"></div></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:0.15s">
-        <div class="skill-card">
-          <div class="skill-card-header"><div class="skill-card-icon icon-purple"><i class="bi bi-server"></i></div><div class="skill-card-title">Développement Back-end</div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Node.js</span><span class="skill-pct">3%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-purple" data-width="3"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">PHP</span><span class="skill-pct">3%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-purple" data-width="3"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Python</span><span class="skill-pct">3%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-purple" data-width="3"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Laravel</span><span class="skill-pct">3%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-purple" data-width="3"></div></div></div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 reveal" style="transition-delay:0.3s">
-        <div class="skill-card">
-          <div class="skill-card-header"><div class="skill-card-icon icon-pink"><i class="bi bi-tools"></i></div><div class="skill-card-title">Outils & Technologies</div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Git / GitHub</span><span class="skill-pct">90%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-pink" data-width="90"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Responsive Design</span><span class="skill-pct">95%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-pink" data-width="95"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Bureautique</span><span class="skill-pct">55%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-pink" data-width="55"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Canva</span><span class="skill-pct">90%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill fill-pink" data-width="90"></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Adobe / Design Graphique -->
-      <div class="col-md-10 offset-lg-1 reveal mb-5" style="transition-delay:0.45s">
-        <div class="skill-card">
-          <div class="skill-card-header">
-            <div class="skill-card-icon" style="background:rgba(255,99,71,0.15);color:#ff6347"><i class="bi bi-brush"></i></div>
-            <div class="skill-card-title">Design Graphique</div>
-          </div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Photoshop</span><span class="skill-pct" style="color:#31a8ff">70%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="background:linear-gradient(90deg,#31a8ff,#0066cc)" data-width="70"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Illustrator</span><span class="skill-pct" style="color:#ff9a00">65%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="background:linear-gradient(90deg,#ff9a00,#ff6300)" data-width="65"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">Premiere Pro</span><span class="skill-pct" style="color:#9999ff">55%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="background:linear-gradient(90deg,#9999ff,#6666cc)" data-width="55"></div></div></div>
-          <div class="skill-item"><div class="skill-meta"><span class="skill-name">InDesign</span><span class="skill-pct" style="color:#ff3366">30%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="background:linear-gradient(90deg,#ff3366,#cc0044)" data-width="30"></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- CONFIANCE -->
+<section class="fade-in py-5">
+<div class="container">
+<div class="row g-4 text-center">
+<div class="col-6 col-md-3">
+<div class="trust-item">
+<i class="bi bi-shield-check"></i>
+<h4 class="fw-bold mb-0">100%</h4>
+<p class="text-muted small">Produits certifiés</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="trust-item">
+<i class="bi bi-people-fill"></i>
+<h4 class="fw-bold mb-0">2 500+</h4>
+<p class="text-muted small">Clientes satisfaites</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="trust-item">
+<i class="bi bi-award-fill"></i>
+<h4 class="fw-bold mb-0">8 ans</h4>
+<p class="text-muted small">D'expérience</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="trust-item">
+<i class="bi bi-heart-fill"></i>
+<h4 class="fw-bold mb-0">4.9/5</h4>
+<p class="text-muted small">Note moyenne</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- PROJECTS -->
+<!-- MODAL PANIER -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+<div class="modal-content border-0 shadow-lg">
 
-<section id="projects">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <h2 class="section-title">Mes réalisations.</h2>
-      <div class="underline-accent mx-auto"></div>
+<div class="modal-header bg-dark text-white">
+  <h5 class="modal-title" id="cartModalLabel"><i class="bi bi-cart3 me-2"></i>Votre Panier</h5>
+  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+
+<div class="modal-body">
+  <div id="cart-empty" class="text-center py-5">
+    <i class="bi bi-cart-x" style="font-size:60px;color:#ccc;"></i>
+    <p class="mt-3 text-muted fs-5">Votre panier est vide</p>
+    <button class="btn btn-outline-dark mt-2" data-bs-dismiss="modal">Continuer mes achats</button>
+  </div>
+  <ul id="cart-items" class="list-group list-group-flush mb-3"></ul>
+  <div id="cart-summary" style="display:none;">
+    <hr>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="text-muted">Sous-total</span>
+      <span class="fw-bold" id="subtotal">0 FCFA</span>
     </div>
-    <div class="row g-4">
-      <div class="col-md-6 reveal">
-        <div class="project-card">
-          <div class="project-thumb project-thumb-1"><span class="project-thumb-icon">🛍️</span><div class="project-thumb-overlay"></div><span class="project-num-badge">01</span></div>
-          <div class="project-body">
-            <h3 class="project-title">Petit Bonheur</h3>
-            <p class="project-desc">Site web pour une boutique enfantine. Interface colorée et intuitive pour la vente de vêtements et accessoires pour bébés et enfants.</p>
-            <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">CSS3</span><span class="project-tag">Bootstrap</span></div>
-            <a href="#" class="project-link">Voir le projet <i class="bi bi-arrow-up-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 reveal" style="transition-delay:0.1s">
-        <div class="project-card">
-          <div class="project-thumb project-thumb-2"><span class="project-thumb-icon">💄</span><div class="project-thumb-overlay"></div><span class="project-num-badge">02</span></div>
-          <div class="project-body">
-            <h3 class="project-title">Élégance Cosmétique</h3>
-            <p class="project-desc">Site web pour vente de produits cosmétiques avec catalogue, fiches produits détaillées et interface d'achat élégante.</p>
-            <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">CSS3</span><span class="project-tag">JavaScript</span></div>
-            <a href="#" class="project-link">Voir le projet <i class="bi bi-arrow-up-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 reveal" style="transition-delay:0.2s">
-        <div class="project-card">
-          <div class="project-thumb project-thumb-3"><span class="project-thumb-icon">❤️</span><div class="project-thumb-overlay"></div><span class="project-num-badge">03</span></div>
-          <div class="project-body">
-            <h3 class="project-title">BeautyGlow</h3>
-            <p class="project-desc">Site web pour un institut de beauté:présentation des soins ,avec un design élégant et raffiné.</p>
-            <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">JavaScript</span><span class="project-tag">CSS3</span></div>
-            <a href="#" class="project-link">Voir le projet <i class="bi bi-arrow-up-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 reveal" style="transition-delay:0.3s">
-        <div class="project-card">
-          <div class="project-thumb project-thumb-4"><span class="project-thumb-icon">👩🏽‍💻</span><div class="project-thumb-overlay"></div><span class="project-num-badge">04</span></div>
-          <div class="project-body">
-            <h3 class="project-title">Portfolio Personnel</h3>
-            <p class="project-desc">Ce portfolio ! Conçu en HTML, CSS et Bootstrap avec mode sombre/clair, animations fluides et design moderne.</p>
-            <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">Bootstrap</span><span class="project-tag">JavaScript</span></div>
-            <a href="#" class="project-link">Voir le code <i class="bi bi-github"></i></a>
-          </div>
-        </div>
-      </div>
+    <div class="d-flex justify-content-between align-items-center mb-2" id="discount-row" style="display:none!important;">
+      <span class="text-success">Remise</span>
+      <span class="fw-bold text-success" id="discount-amount">- 0 FCFA</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center fs-5">
+      <span class="fw-bold">Total</span>
+      <span class="fw-bold text-danger" id="total">0 FCFA</span>
+    </div>
+    <div class="input-group mt-3">
+      <input type="text" id="promoCode" class="form-control" placeholder="Code promo (ex: BEAUTY10)">
+      <button class="btn btn-dark" onclick="applyPromo()"><i class="bi bi-tag"></i> Appliquer</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FORMATIONS -->
+<div class="modal-footer" id="cart-footer" style="display:none;">
+  <button class="btn btn-outline-dark" data-bs-dismiss="modal">Continuer mes achats</button>
+  <button class="btn btn-warning btn-lg flex-grow-1" onclick="checkout()">
+    <i class="bi bi-credit-card me-2"></i>Valider la commande
+  </button>
+</div>
 
-<section id="formations">
-  <div class="container">
-    <div class="row g-5">
-      <div class="col-lg-5 reveal-left">
-        <h2 class="section-title">Mon parcours académique.</h2>
-        <div class="underline-accent"></div>
-        <p class="section-sub">Des formations qui m'ont permis de construire mes compétences en développement web et design.</p>
-      </div>
-      <div class="col-lg-7 reveal-right">
-        <div class="d-flex flex-column gap-3">
-          <div class="formation-card"><div class="formation-icon"><i class="bi bi-mortarboard"></i></div><div><div class="formation-period">2025 — 2026</div><div class="formation-title">Développement Web & Mobile</div><div class="formation-school">Formation intensive — LINEKODE</div></div></div>
-          <div class="formation-card"><div class="formation-icon"><i class="bi bi-palette"></i></div><div><div class="formation-period">2025</div><div class="formation-title">UI/UX Design & Canva</div><div class="formation-school">Autoformation & pratique</div></div></div>
-          <div class="formation-card"><div class="formation-icon"><i class="bi bi-laptop-fill"></i></div><div><div class="formation-period">2025 — 2026</div><div class="formation-title">HTML5 / CSS3 / Bootstrap</div><div class="formation-school">100% pratique — LINEKODE </div></div></div>
-          <div class="formation-card"><div class="formation-icon"><i class="bi bi-git"></i></div><div><div class="formation-period">2026</div><div class="formation-title">Git / GitHub</div><div class="formation-school">LINEKODE</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
+</div>
+</div>
 
-<!-- EXPERIENCE -->
-
-<section id="experience">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <h2 class="section-title">Mon expérience.</h2>
-      <div class="underline-accent mx-auto"></div>
-    </div>
-    <div class="row g-4 align-items-start">
-      <div class="col-lg-4 reveal">
-        <div class="xp-banner"><div class="xp-banner-num">1</div><div class="xp-banner-text">An d'expérience<br>en développement web</div></div>
-        <div class="xp-banner mt-3" style="padding:1.5rem"><div class="xp-banner-num" style="font-size:2.5rem">0</div><div class="xp-banner-text">Client <br>Pour l'instant</div></div>
-      </div>
-      <div class="col-lg-8 reveal" style="transition-delay:0.2s">
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem">
-          <ul class="xp-list">
-            <li><i class="bi bi-check2-circle"></i><div><strong>Développement de sites web complets</strong> — De la maquette au déploiement, avec un design responsive soigné.</div></li>
-            <li><i class="bi bi-check2-circle"></i><div><strong>4 projets réalisés</strong> — BeautyGlow,Élégance cosmétiques,Petit Bonheur et ce portfolio.</div></li>
-            <li><i class="bi bi-check2-circle"></i><div><strong>Design d'interfaces</strong> — Maîtrise de Canva et sens du design appliqués aux projets web.</div></li>
-            <li><i class="bi bi-check2-circle"></i><div><strong>Responsive Design</strong> — Toutes mes interfaces sont optimisées pour mobile et desktop.</div></li>
-            <li><i class="bi bi-check2-circle"></i><div><strong>Disponible pour collaborer</strong> — Ouverte à des projets freelance, stages ou collaborations.</div></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- RESERVATION -->
+<section id="reservation" class="fade-in">
+<div class="container">
+<div class="row align-items-center g-5">
+<div class="col-lg-5 text-center text-lg-start">
+<p class="section-subtitle">Prenez rendez-vous</p>
+<h2 class="section-title mb-4">Réservez votre séance</h2>
+<p class="text-muted">Offrez-vous un moment de détente et de beauté. Choisissez votre soin, votre date, et laissez-nous nous occuper du reste.</p>
+<div class="d-flex gap-3 mt-4 justify-content-center justify-content-lg-start">
+<div class="text-center">
+<i class="bi bi-calendar-check text-warning" style="font-size:28px;"></i>
+<p class="small text-muted mt-1 mb-0">Réservation facile</p>
+</div>
+<div class="text-center">
+<i class="bi bi-lock text-warning" style="font-size:28px;"></i>
+<p class="small text-muted mt-1 mb-0">Paiement sécurisé</p>
+</div>
+<div class="text-center">
+<i class="bi bi-check-circle text-warning" style="font-size:28px;"></i>
+<p class="small text-muted mt-1 mb-0">Confirmation instantanée</p>
+</div>
+</div>
+</div>
+<div class="col-lg-7">
+<form class="reservation-form p-4 p-md-5 shadow-lg rounded-4 bg-white">
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label fw-semibold small text-muted">Nom complet</label>
+<div class="input-group">
+<span class="input-group-text bg-white"><i class="bi bi-person"></i></span>
+<input type="text" class="form-control" placeholder="Votre nom" required>
+</div>
+</div>
+<div class="col-md-6">
+<label class="form-label fw-semibold small text-muted">Téléphone</label>
+<div class="input-group">
+<span class="input-group-text bg-white"><i class="bi bi-telephone"></i></span>
+<input type="tel" class="form-control" placeholder="+221 7X XXX XX XX">
+</div>
+</div>
+<div class="col-md-6">
+<label class="form-label fw-semibold small text-muted">Date</label>
+<div class="input-group">
+<span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+<input type="date" class="form-control" required>
+</div>
+</div>
+<div class="col-md-6">
+<label class="form-label fw-semibold small text-muted">Heure</label>
+<div class="input-group">
+<span class="input-group-text bg-white"><i class="bi bi-clock"></i></span>
+<input type="time" class="form-control" required>
+</div>
+</div>
+<div class="col-12">
+<label class="form-label fw-semibold small text-muted">Service souhaité</label>
+<select class="form-select">
+<option>Soin du visage - 25 000 FCFA</option>
+<option>Manucure & Pédicure - 15 000 FCFA</option>
+<option>Maquillage Pro - 30 000 FCFA</option>
+<option>Extensions de cils - 20 000 FCFA</option>
+<option>Massage Relaxant - 35 000 FCFA</option>
+<option>Forfait Mariée Luxe - 100 000 FCFA</option>
+</select>
+</div>
+<div class="col-12 mt-2">
+<button type="button" onclick="payer()" class="btn btn-warning w-100 btn-lg rounded-pill">
+<i class="bi bi-credit-card me-2"></i>Payer et Réserver
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
 </section>
 
 <!-- CONTACT -->
+<section id="contact" class="bg-light fade-in">
+<div class="container">
+<p class="section-subtitle text-center">Restons en contact</p>
+<h2 class="section-title text-center mb-5">Contactez-nous</h2>
+<div class="row g-4">
 
-<section id="contact">
-  <div class="container">
-    <div class="text-center mb-5 reveal">
-      <h2 class="section-title">Travaillons ensemble !</h2>
-      <div class="underline-accent mx-auto"></div>
-      <p class="section-sub mx-auto">Une idée, un projet, une opportunité ? N'hésitez pas à me contacter !</p>
-    </div>
-    <div class="contact-grid">
-      <div class="reveal-left">
-        <a href="mailto:magatteniang021@gmail.com" class="contact-info-item">
-          <div class="contact-info-icon ci-blue"><i class="bi bi-envelope-fill"></i></div>
-          <div><div class="contact-info-label">Email</div><div class="contact-info-value">magatteniang021@gmail.com</div></div>
-        </a>
-        <a href="tel:+221782072869" class="contact-info-item">
-          <div class="contact-info-icon ci-green"><i class="bi bi-telephone-fill"></i></div>
-          <div><div class="contact-info-label">Téléphone</div><div class="contact-info-value">+221 78 207 28 69</div></div>
-        </a>
-        <div class="contact-info-item" style="cursor:default">
-          <div class="contact-info-icon ci-orange"><i class="bi bi-geo-alt-fill"></i></div>
-          <div><div class="contact-info-label">Localisation</div><div class="contact-info-value">Saint-Louis, Sénégal</div></div>
-        </div>
-        <div class="social-row">
-          <a href="#"><i class="bi bi-github"></i> GitHub</a>
-          <a href="#"><i class="bi bi-linkedin"></i> LinkedIn</a>
-          <a href="#"><i class="bi bi-facebook"></i> Facebook</a>
-          <a href="#"><i class="bi bi-instagram"></i> Instagram</a>
-        </div>
-      </div>
-      <div class="reveal-right">
-        <div class="contact-form-wrap">
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;margin-bottom:1.5rem">Envoyez-moi un message</h3>
-          <form id="contactForm">
-            <div class="row g-3">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="form-label-custom">Nom complet *</label>
-                  <input type="text" class="form-control-custom" placeholder="Votre nom" required/>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="form-label-custom">Email *</label>
-                  <input type="email" class="form-control-custom" placeholder="votre@email.com" required/>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label-custom">Sujet</label>
-              <input type="text" class="form-control-custom" placeholder="Collaboration, projet freelance..."/>
-            </div>
-            <div class="form-group">
-              <label class="form-label-custom">Message *</label>
-              <textarea class="form-control-custom" placeholder="Décrivez votre projet ou votre demande..." required></textarea>
-            </div>
-            <button type="submit" class="btn-submit"><i class="bi bi-send"></i> Envoyer le message</button>
-          </form>
-          <div id="formSuccess" style="display:none;margin-top:1rem;padding:1rem;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;color:#22c55e;font-size:0.88rem;text-align:center">
-            <i class="bi bi-check-circle me-2"></i>Message envoyé avec succès !
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-lg-5">
+<div class="contact-info p-4 p-md-5 shadow-sm rounded-4 bg-white h-100">
+<h5 class="fw-bold mb-4"><i class="bi bi-building me-2 text-warning"></i>Nos Informations</h5>
+<div class="d-flex align-items-start mb-3">
+<i class="bi bi-geo-alt-fill text-warning me-3 mt-1" style="font-size:20px;"></i>
+<div><p class="mb-0 fw-semibold">Adresse</p><p class="text-muted small mb-0">Saint-Louis, Sénégal</p></div>
+</div>
+<div class="d-flex align-items-start mb-3">
+<i class="bi bi-telephone-fill text-warning me-3 mt-1" style="font-size:20px;"></i>
+<div><p class="mb-0 fw-semibold">Téléphone</p><p class="text-muted small mb-0">+221 78 504 51 83</p></div>
+</div>
+<div class="d-flex align-items-start mb-3">
+<i class="bi bi-envelope-fill text-warning me-3 mt-1" style="font-size:20px;"></i>
+<div><p class="mb-0 fw-semibold">Email</p><p class="text-muted small mb-0">contactbeautyglow@gmail.com</p></div>
+</div>
+<hr>
+<div class="d-flex align-items-start mb-3">
+<i class="bi bi-clock-fill text-warning me-3 mt-1" style="font-size:20px;"></i>
+<div>
+<p class="mb-0 fw-semibold">Horaires</p>
+<p class="text-muted small mb-0">Lundi - Samedi : 9h - 19h</p>
+<p class="text-muted small mb-0">Dimanche : Fermé</p>
+</div>
+</div>
+<a href="https://wa.me/221785045183" target="_blank" class="btn btn-success w-100 mt-3 rounded-pill">
+<i class="bi bi-whatsapp me-2"></i>Discuter sur WhatsApp
+</a>
+</div>
+</div>
+
+<div class="col-lg-7">
+<div class="shadow-sm rounded-4 overflow-hidden h-100">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122716.05008025024!2d-16.540701949575656!3d16.01993983211128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe955655141ee805%3A0xe91d1d12f36a7e64!2sSaint-Louis!5e0!3m2!1sfr!2ssn!4v1771426922935!5m2!1sfr!2ssn" width="100%" height="100%" style="border:0;min-height:400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<footer>
-  <span class="footer-logo">Magui<span>_Dev</span></span>
-  <span>© 2026 Magui-Saliou — Tous droits réservés</span>
-  <span>Chaque ligne <span style="color:var(--accent3)">♥</span>de code est une oeuvre d'arts🎨</span>
+<!-- FOOTER -->
+<footer class="footer-dark pt-5 pb-3">
+<div class="container">
+<div class="row g-4 mb-4">
+<div class="col-lg-4 col-md-6">
+<h4 class="fw-bold mb-3">Beauty <span>Glow</span></h4>
+<p class="text-white-50 small">Institut de beauté haut de gamme à Saint-Louis. Nous sublimons votre beauté naturelle avec des soins premium et un savoir-faire d'exception.</p>
+<div class="social-links mt-3">
+<a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+<a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+<a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+<a href="https://wa.me/221785045183" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+</div>
+</div>
+<div class="col-lg-2 col-md-6">
+<h6 class="fw-bold text-white mb-3">Navigation</h6>
+<ul class="list-unstyled footer-links">
+<li><a href="#services">Services</a></li>
+<li><a href="#packs">Packs</a></li>
+<li><a href="#reservation">Réserver</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6">
+<h6 class="fw-bold text-white mb-3">Horaires d'ouverture</h6>
+<ul class="list-unstyled text-white-50 small">
+<li class="mb-2 d-flex justify-content-between"><span>Lundi - Vendredi</span><span>9h - 19h</span></li>
+<li class="mb-2 d-flex justify-content-between"><span>Samedi</span><span>9h - 18h</span></li>
+<li class="mb-2 d-flex justify-content-between"><span>Dimanche</span><span class="text-danger">Fermé</span></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6">
+<h6 class="fw-bold text-white mb-3">Newsletter</h6>
+<p class="text-white-50 small">Recevez nos offres exclusives et promotions.</p>
+<div class="input-group">
+<input type="email" class="form-control form-control-sm" placeholder="Votre email">
+<button class="btn btn-warning btn-sm"><i class="bi bi-send"></i></button>
+</div>
+</div>
+</div>
+<hr class="border-secondary">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+<p class="text-white-50 small mb-0">&copy; 2026 BeautyGlow - Tous droits réservés</p>
+<p class="text-white-50 small mb-0">Fait avec <i class="bi bi-heart-fill text-danger"></i> à Saint-Louis</p>
+</div>
+</div>
 </footer>
 
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // THEME TOGGLE
-  const html = document.documentElement;
-  const themeBtn = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
+let cart = [];
+let discount = 0;
 
-  function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    themeIcon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
-    localStorage.setItem('theme', theme);
-  }
-  setTheme(localStorage.getItem('theme') || 'dark');
-  themeBtn.addEventListener('click', () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+function animateCartIcon() {
+    const icon = document.getElementById("cart-icon");
+    icon.classList.add("cart-bounce");
+    setTimeout(() => icon.classList.remove("cart-bounce"), 600);
+}
 
-  // HAMBURGER
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+function updateCartCount() {
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    const badge = document.getElementById("cart-count");
+    if (totalQty > 0) {
+        badge.style.display = "inline-block";
+        badge.textContent = totalQty;
+    } else {
+        badge.style.display = "none";
+    }
+}
 
-  // ACTIVE NAV
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
-    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
-  });
+function getTotal() {
+    return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
 
-  // SCROLL ANIMATIONS
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        entry.target.querySelectorAll('.progress-bar-fill').forEach(bar => {
-          setTimeout(() => bar.style.width = bar.dataset.width + '%', 200);
+function addToCart(name, price, btn) {
+    btn.innerHTML = '<i class="bi bi-bag-check me-2"></i>Ajouté !';
+    btn.classList.add("btn-success");
+    setTimeout(() => {
+        btn.innerHTML = '<i class="bi bi-bag-plus me-2"></i>Ajouter au panier';
+        btn.classList.remove("btn-success");
+    }, 1500);
+
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
+
+    animateCartIcon();
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartEmpty = document.getElementById("cart-empty");
+    const cartSummary = document.getElementById("cart-summary");
+    const cartFooter = document.getElementById("cart-footer");
+    const discountRow = document.getElementById("discount-row");
+
+    cartItems.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartEmpty.style.display = "block";
+        cartSummary.style.display = "none";
+        cartFooter.style.display = "none";
+    } else {
+        cartEmpty.style.display = "none";
+        cartSummary.style.display = "block";
+        cartFooter.style.display = "flex";
+
+        cart.forEach((item, index) => {
+            cartItems.innerHTML += `
+            <li class="list-group-item d-flex justify-content-between align-items-center cart-item-row">
+                <div>
+                    <strong>${item.name}</strong>
+                    <div class="text-muted small">${item.price.toLocaleString()} FCFA x ${item.qty}</div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button class="btn btn-outline-secondary" onclick="changeQty(${index}, -1)">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <span class="btn btn-light disabled qty-display">${item.qty}</span>
+                        <button class="btn btn-outline-secondary" onclick="changeQty(${index}, 1)">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
+                    <span class="fw-bold">${(item.price * item.qty).toLocaleString()} FCFA</span>
+                    <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </li>`;
         });
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+    }
 
-  // Skill bars standalone observer
-  new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.querySelectorAll('.progress-bar-fill').forEach(b => setTimeout(() => b.style.width = b.dataset.width + '%', 200));
-    });
-  }, { threshold: 0.3 }).observe ? document.querySelectorAll('.skill-card').forEach(el => {
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.querySelectorAll('.progress-bar-fill').forEach(b => setTimeout(() => b.style.width = b.dataset.width + '%', 200)); });
-    }, { threshold: 0.3 }).observe(el);
-  }) : null;
+    const subtotal = getTotal();
+    const finalTotal = subtotal - discount;
+    document.getElementById("subtotal").innerText = subtotal.toLocaleString() + " FCFA";
+    document.getElementById("total").innerText = finalTotal.toLocaleString() + " FCFA";
 
-  // FORM
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.getElementById('formSuccess').style.display = 'block';
-    this.reset();
-    setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
-  });
+    if (discount > 0) {
+        discountRow.style.display = "flex";
+        discountRow.style.cssText = "display:flex!important";
+        document.getElementById("discount-amount").innerText = "- " + discount.toLocaleString() + " FCFA";
+    } else {
+        discountRow.style.cssText = "display:none!important";
+    }
+
+    updateCartCount();
+}
+
+function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
+    discount = 0;
+    animateCartIcon();
+    updateCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    discount = 0;
+    updateCart();
+}
+
+function applyPromo() {
+    const code = document.getElementById("promoCode").value;
+    const total = getTotal();
+    if (code === "BEAUTY10") {
+        discount = total * 0.10;
+        alert("Code promo appliqu\u00e9 -10% \ud83c\udf89");
+    } else {
+        discount = 0;
+        alert("Code invalide");
+    }
+    updateCart();
+}
+
+function checkout() {
+    if (cart.length === 0) { alert("Votre panier est vide \ud83d\uded2"); return; }
+    alert("Redirection vers paiement s\u00e9curis\u00e9 \ud83d\udcb3");
+    window.location.href = "https://buy.stripe.com/test_123456789";
+}
+
+function payer() { checkout(); }
+
+window.addEventListener("scroll", function () {
+    document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 50);
+});
+
+const faders = document.querySelectorAll(".fade-in");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add("show"); }
+    });
+});
+faders.forEach(f => observer.observe(f));
 </script>
-
 </body>
 </html>
